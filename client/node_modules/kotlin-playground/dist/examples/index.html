@@ -1,0 +1,193 @@
+<!doctype html><html><head><meta charset="UTF-8"><title>Kotlin Playground examples</title><link rel="stylesheet" href="examples.css"><link rel="stylesheet" href="examples-highlight.css"><style>.markdown-body {
+		max-width: 980px;
+		margin: 50px auto;
+	}</style><script src="../playground.js" data-selector=".kotlin-code"></script></head><body class="markdown-body"><h1>Kotlin Playground demo</h1><h2>Automatic initialization</h2><p>Insert a <code>&lt;script&gt;</code> element into your page and specify what elements should be converted in its <code>data-selector</code> attribute.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/kotlin-playground@1&quot;</span> <span class="hljs-attr">data-selector</span>=<span class="hljs-string">&quot;.kotlin-code&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>For instance following block of Kotlin code:</p><pre><code class="hljs language-txt">class Contact(val id: Int, var email: String) 
+
+fun main(args: Array&lt;String&gt;) {
+    val contact = Contact(1, &quot;mary@gmail.com&quot;)
+    println(contact.id)                   
+}
+</code></pre><p>Turns into:</p><div class="kotlin-code"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Contact</span>(<span class="hljs-keyword">val</span> id: <span class="hljs-built_in">Int</span>, <span class="hljs-keyword">var</span> email: String) 
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    <span class="hljs-keyword">val</span> contact = Contact(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;mary@gmail.com&quot;</span>)
+    println(contact.id)
+}
+</code></pre></div><p>You can also change the playground theme or disable run button using <code>theme</code> and <code>data-highlight-only</code> attributes.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;idea&quot;</span> <span class="hljs-attr">data-highlight-only</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-highlight-only theme="idea"><pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    println(<span class="hljs-string">&quot;Hello World!&quot;</span>)
+}
+</code></pre></div><p>Or theme <code>kotlin-dark</code></p><div class="kotlin-code" data-highlight-only theme="kotlin-dark"><pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    println(<span class="hljs-string">&quot;Hello World!&quot;</span>)
+}
+</code></pre></div><p>Set another target platform with attribute <code>data-target-platform</code>.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="js"><pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">sum</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> {
+    <span class="hljs-keyword">return</span> a + b
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    print(sum(-<span class="hljs-number">1</span>, <span class="hljs-number">8</span>))
+}
+</code></pre></div><p>You can use JS IR compiler also.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;js-ir&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="js-ir"><pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">mul</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> {
+    <span class="hljs-keyword">return</span> a * b
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    print(mul(-<span class="hljs-number">2</span>, <span class="hljs-number">4</span>))
+}
+</code></pre></div><p>You can use Wasm compiler.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;wasm&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="wasm"><pre><code class="hljs language-kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">mul</span><span class="hljs-params">(a: <span class="hljs-type">Int</span>, b: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> {
+    <span class="hljs-keyword">return</span> a * b
+}
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+    print(mul(-<span class="hljs-number">2</span>, <span class="hljs-number">4</span>))
+    println(<span class="hljs-string">&quot; + 7 =&quot;</span>)
+    print(mul(-<span class="hljs-number">2</span>, <span class="hljs-number">4</span>) + <span class="hljs-number">7</span>)
+}
+</code></pre></div><p>Use <code>data-target-platform</code> attribute with value <code>junit</code> for creating examples with tests:</p><div class="kotlin-code" data-target-platform="junit"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">import</span> org.junit.Test
+<span class="hljs-keyword">import</span> org.junit.Assert
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TestExtensionFunctions</span>() {
+    <span class="hljs-meta">@Test</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">testIntExtension</span><span class="hljs-params">()</span></span> {
+        Assert.assertEquals(<span class="hljs-string">&quot;Rational number creation error: &quot;</span>, RationalNumber(<span class="hljs-number">4</span>, <span class="hljs-number">1</span>), <span class="hljs-number">4.</span>r())
+    }
+
+    <span class="hljs-meta">@Test</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">testPairExtension</span><span class="hljs-params">()</span></span> {
+        Assert.assertEquals(<span class="hljs-string">&quot;Rational number creation error: &quot;</span>, RationalNumber(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), Pair(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>).r())
+    }
+}
+<span class="hljs-comment">//sampleStart</span>
+<span class="hljs-comment">/*
+Then implement extension functions Int.r() and Pair.r() and make them convert Int and Pair to RationalNumber.
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-built_in">Int</span>.<span class="hljs-title">r</span><span class="hljs-params">()</span></span>: RationalNumber = RationalNumber(<span class="hljs-keyword">this</span>, <span class="hljs-number">2</span>)
+<span class="hljs-function"><span class="hljs-keyword">fun</span> Pair<span class="hljs-type">&lt;Int, Int&gt;</span>.<span class="hljs-title">r</span><span class="hljs-params">()</span></span>: RationalNumber = RationalNumber(first, second)
+
+<span class="hljs-keyword">data</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RationalNumber</span>(<span class="hljs-keyword">val</span> numerator: <span class="hljs-built_in">Int</span>, <span class="hljs-keyword">val</span> denominator: <span class="hljs-built_in">Int</span>)
+<span class="hljs-comment">//sampleEnd</span>
+</code></pre></div><p>The test clases in this code snippet are folded away thanks to the <code>//sampleStart</code> and <code>//sampleEnd</code> comments in the code. If you want to hide test classes completely just set the attribute <code>folded-button</code> to <code>false</code> value.</p><p>Also you can mark arbitrary code by putting it between <code>[mark]your code[/mark]</code>.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;junit&quot;</span> <span class="hljs-attr">folded-button</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="junit" folded-button="false"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">import</span> org.junit.Test
+<span class="hljs-keyword">import</span> org.junit.Assert
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TestLambdas</span>() {
+    <span class="hljs-meta">@Test</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">contains</span><span class="hljs-params">()</span></span> {
+        Assert.assertTrue(<span class="hljs-string">&quot;The result should be true if the collection contains an even number&quot;</span>, 
+                          containsEven(listOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">126</span>, <span class="hljs-number">555</span>)))
+    }
+
+    <span class="hljs-meta">@Test</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">notContains</span><span class="hljs-params">()</span></span> {
+        Assert.assertFalse(<span class="hljs-string">&quot;The result should be false if the collection doesn&#x27;t contain an even number&quot;</span>,
+                           containsEven(listOf(<span class="hljs-number">43</span>, <span class="hljs-number">33</span>)))
+    }
+}
+<span class="hljs-comment">//sampleStart</span>
+<span class="hljs-comment">/*
+Pass a lambda to any function to check if the collection contains an even number.
+The function any gets a predicate as an argument and returns true if there is at least one element satisfying the predicate.
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">containsEven</span><span class="hljs-params">(collection: <span class="hljs-type">Collection</span>&lt;<span class="hljs-type">Int</span>&gt;)</span></span>: <span class="hljs-built_in">Boolean</span> = collection.any {[mark]TODO()[/mark]}
+<span class="hljs-comment">//sampleEnd</span>
+</code></pre></div><p>Use <code>data-target-platform</code> attribute with value <code>canvas</code> for working with canvas in Kotlin:</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;canvas&quot;</span> <span class="hljs-attr">data-output-height</span>=<span class="hljs-string">&quot;200&quot;</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="canvas" data-output-height="200"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">package</span> fancylines
+
+<span class="hljs-keyword">import</span> org.w3c.dom.CanvasRenderingContext2D
+<span class="hljs-keyword">import</span> org.w3c.dom.HTMLCanvasElement
+<span class="hljs-keyword">import</span> kotlinx.browser.document
+<span class="hljs-keyword">import</span> kotlinx.browser.window
+<span class="hljs-keyword">import</span> kotlin.random.Random
+
+
+
+<span class="hljs-keyword">val</span> canvas = initalizeCanvas()
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">initalizeCanvas</span><span class="hljs-params">()</span></span>: HTMLCanvasElement {
+    <span class="hljs-keyword">val</span> canvas = document.createElement(<span class="hljs-string">&quot;canvas&quot;</span>) <span class="hljs-keyword">as</span> HTMLCanvasElement
+    <span class="hljs-keyword">val</span> context = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>) <span class="hljs-keyword">as</span> CanvasRenderingContext2D
+    context.canvas.width  = window.innerWidth.toInt();
+    context.canvas.height = window.innerHeight.toInt();
+    document.body!!.appendChild(canvas)
+    <span class="hljs-keyword">return</span> canvas
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">FancyLines</span>() {
+    <span class="hljs-keyword">val</span> context = canvas.getContext(<span class="hljs-string">&quot;2d&quot;</span>) <span class="hljs-keyword">as</span> CanvasRenderingContext2D
+    <span class="hljs-keyword">val</span> height = canvas.height
+    <span class="hljs-keyword">val</span> width = canvas.width
+    <span class="hljs-keyword">var</span> x = width * Random.nextDouble()
+    <span class="hljs-keyword">var</span> y = height * Random.nextDouble()
+    <span class="hljs-keyword">var</span> hue = <span class="hljs-number">0</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">line</span><span class="hljs-params">()</span></span> {
+        context.save();
+
+        context.beginPath();
+
+        context.lineWidth = <span class="hljs-number">20.0</span> * Random.nextDouble();
+        context.moveTo(x, y);
+
+        x = width * Random.nextDouble();
+        y = height * Random.nextDouble();
+
+        context.bezierCurveTo(width * Random.nextDouble(), height * Random.nextDouble(),
+                width * Random.nextDouble(), height * Random.nextDouble(), x, y);
+
+        hue += (Random.nextDouble() * <span class="hljs-number">10</span>).toInt();
+
+        context.strokeStyle = <span class="hljs-string">&quot;hsl(<span class="hljs-variable">$hue</span>, 50%, 50%)&quot;</span>;
+
+        context.shadowColor = <span class="hljs-string">&quot;white&quot;</span>;
+        context.shadowBlur = <span class="hljs-number">10.0</span>;
+
+        context.stroke();
+
+        context.restore();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">blank</span><span class="hljs-params">()</span></span> {
+        context.fillStyle = <span class="hljs-string">&quot;rgba(255,255,1,0.1)&quot;</span>;
+        context.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, width.toDouble(), height.toDouble());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span> {
+        window.setInterval({ line() }, <span class="hljs-number">40</span>);
+        window.setInterval({ blank() }, <span class="hljs-number">100</span>);
+    }
+}
+<span class="hljs-comment">//sampleStart</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">(args: <span class="hljs-type">Array</span>&lt;<span class="hljs-type">String</span>&gt;)</span></span> {
+     FancyLines().run()
+}
+<span class="hljs-comment">//sampleEnd</span>
+</code></pre></div><p>Use <code>data-js-libs</code> with a comma-separated list of URLs to specify additional javascript libraries to load.</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;kotlin-code&quot;</span> <span class="hljs-attr">data-target-platform</span>=<span class="hljs-string">&quot;js&quot;</span> <span class="hljs-attr">data-js-libs</span>=<span class="hljs-string">&quot;https://unpkg.com/moment@2&quot;</span>&gt;</span>
+</code></pre><div class="kotlin-code" data-target-platform="js" data-js-libs="https://unpkg.com/moment@2"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">external</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">moment</span><span class="hljs-params">()</span></span>: <span class="hljs-keyword">dynamic</span>
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">val</span> startOfDay = moment().startOf(<span class="hljs-string">&quot;day&quot;</span>).fromNow()
+    println(<span class="hljs-string">&quot;The start of the day was <span class="hljs-variable">$startOfDay</span>&quot;</span>)
+}
+</code></pre></div><div class="kotlin-code" data-crosslink="disabled" data-target-platform="js" data-js-libs="https://unpkg.com/moment@2"><pre><code class="hljs language-kotlin"><span class="hljs-keyword">external</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">moment</span><span class="hljs-params">()</span></span>: <span class="hljs-keyword">dynamic</span>
+
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">val</span> startOfDay = moment().startOf(<span class="hljs-string">&quot;day&quot;</span>).fromNow()
+    println(<span class="hljs-string">&quot;The start of the day was <span class="hljs-variable">$startOfDay</span>&quot;</span>)
+}
+</code></pre></div><h2>Manual initialization</h2><p>If you want to init Kotlin Playground manually - omit <code>data-selector</code> attribute and call it when it's needed:</p><pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://unpkg.com/kotlin-playground@1&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title class_">KotlinPlayground</span>(<span class="hljs-string">&#x27;.kotlin-playground&#x27;</span>);
+});
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>Add additional hidden files: Put your files between <code>&lt;textarea&gt;</code> tag with class <code>hidden-dependency</code>.</p><p>Look at example:</p><p>Themes:</p><div class="kotlin-code" theme="idea">```kotlin fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd } ```</string></div><div class="kotlin-code" theme="darcula  ">```kotlin fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd } ```</string></div><div class="kotlin-code" theme="default">```kotlin fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd } ```</string></div><style>.kotlin-docs.executable-fragment{border:0 transparent}.kotlin-docs .cm-s-kotlin-docs{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace}.kotlin-docs .cm-s-kotlin-docs,.kotlin-docs .cm-s-kotlin-docs.CodeMirror .CodeMirror-linenumber,.kotlin-docs .cm-s-kotlin-docs.CodeMirror pre.CodeMirror-line,.kotlin-docs .cm-s-kotlin-docs.CodeMirror pre.CodeMirror-line-like{color:#999;font-size:15px;line-height:24px}.kotlin-docs .cm-s-kotlin-docs.CodeMirror{border-top-left-radius:8px;border-top-right-radius:8px;background:#f5f5f5}.kotlin-docs .js-code-output-executor,.kotlin-docs .output-wrapper{border-bottom-right-radius:8px;border-bottom-left-radius:8px;background:#f4f4f4}.kotlin-docs .js-code-output-executor{min-height:8px;border:0}.kotlin-docs .output-wrapper{border-top:1px solid rgba(39,40,44,.2);border-bottom:0}.kotlin-docs .run-button{top:8px;right:9px;width:24px;height:24px;background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 12L5 4v16l14-8z' fill='%236E4BF4'/%3E%3C/svg%3E");background-position:50%;background-size:24px}.kotlin-docs .run-button:hover{opacity:.8}.kotlin-docs .code-area .fold-button{width:24px;height:24px;background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 11.005v2.103h-6.013L12.988 19h-2.117l.001-5.892H5v-2.103h5.872V5h2.114l.002 6.005H19z' fill='%2327282C' fill-opacity='.75'/%3E%3C/svg%3E");background-position:50%;background-size:24px}.kotlin-docs .code-area .fold-button:hover{background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23F4F4F4'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 11.005v2.103h-6.013L12.988 19h-2.117l.001-5.892H5v-2.103h5.872V5h2.114l.002 6.005H19z' fill='%2327282C'/%3E%3C/svg%3E")}.kotlin-docs .code-area._unfolded .fold-button{top:-13px;left:calc(50% - 11px);transform:rotate(-45deg)}.kotlin-docs .console-close{top:7px;right:6px;opacity:.75;width:24px;height:24px;cursor:pointer;background:url("data:image/svg+xml,%3Csvg width='24' height='25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17 14.1a4.12 4.12 0 00-4.18-3.6H11v5l-7-6 7-6v5h1.79A6.15 6.15 0 0119 13.71a6 6 0 01-6 6.79H7v-2h6a4 4 0 004-4.4z' fill='%2327282C'/%3E%3C/svg%3E") 50% no-repeat;background-size:24px}.kotlin-docs .console-close:hover{opacity:1}.kotlin-docs .console-icon.attention,.kotlin-docs .ERRORgutter,.kotlin-docs .WARNINGgutter{width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.972 2.552l5.858 10.145c.397.687.072 1.25-.722 1.25H2.798A1.337 1.337 0 011.64 11.94l5.422-9.39a1.103 1.103 0 011.91.001zm.126 8.872a1.081 1.081 0 10-2.162 0 1.081 1.081 0 002.162 0zM7 5.947l1.744-.65v3.604h-1.44L7 5.947z' fill='%23EF341E'/%3E%3C/svg%3E") 50% no-repeat;background-size:16px}.kotlin-docs .console-icon.attention{margin-left:-20px;background-position:-1px -1px}.kotlin-docs .ERRORgutter,.kotlin-docs .WARNINGgutter{margin-top:5px;margin-left:5px}.kotlin-docs .WARNINGgutter{background-image:url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.972 2.552l5.858 10.145c.397.687.072 1.25-.722 1.25H2.798A1.337 1.337 0 011.64 11.94l5.422-9.39a1.103 1.103 0 011.91.001zm.126 8.872a1.081 1.081 0 10-2.162 0 1.081 1.081 0 002.162 0zM7 5.947l1.744-.65v3.604h-1.44L7 5.947z' fill='%2327282C' fill-opacity='.5'/%3E%3C/svg%3E")}.kotlin-docs .errors-and-warnings-gutter{width:24px}.kotlin-docs .code-output{padding-bottom:15px;padding-left:30px}.kotlin-docs div[label]:hover:after{display:inline-flex;margin-top:-1rem;margin-left:1rem;padding:4px 6px;border-radius:2px;content:attr(label);white-space:pre;color:#fff;background:#3c3d40;font-size:13px;line-height:20px}.kotlin-docs .CodeMirror-linebackground.unmodifiable-line{background:rgba(39,40,44,.05)}.kotlin-docs .cm-s-kotlin-docs .CodeMirror-lines{margin:0;padding:12px 0}.kotlin-docs .cm-s-kotlin-docs .CodeMirror-gutters{border:0 transparent}.kotlin-docs .cm-s-kotlin-docs .cm-type{color:#27282c}.kotlin-docs .cm-s-kotlin-docs span.cm-keyword{color:#07a;font-weight:700}.kotlin-docs .cm-s-kotlin-docs span.cm-operator{color:#9a6e3a}.kotlin-docs .cm-s-kotlin-docs span.cm-number{color:#905}.kotlin-docs .cm-s-kotlin-docs span.cm-comment{color:#708090}.kotlin-docs .cm-s-kotlin-docs .cm-variable,.kotlin-docs .cm-s-kotlin-docs .cm-variable-2,.kotlin-docs .cm-s-kotlin-docs .cm-variable-3,.kotlin-docs .cm-s-kotlin-docs span.cm-def,.kotlin-docs .cm-s-kotlin-docs span.cm-property{color:#27282c}.kotlin-docs .cm-s-kotlin-docs span.cm-string,.kotlin-docs .cm-s-kotlin-docs span.cm-string-2{color:#690;font-weight:700}</style><div class="kotlin-code" theme="kotlin-docs">```kotlin fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd } ```</string></div><div class="kotlin-code" theme="kotlin-docs" data-shorter-height="50">fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd }</string></div><div class="kotlin-code" data-shorter-height="50">fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd }</string></div><div class="kotlin-code" theme="darcula" data-shorter-height="50">fun main(args: Array<string>) { //sampleStart val (name, value) = Pair("Kitty", "Kiss") println(name) println(value) //sampleEnd }</string></div><p><button onclick="KotlinPlayground('.kotlin-code-2',{ onChange: (code)=> {console.log(code)}}); this.disabled = true; document.getElementById('kotlin-example').style.display = 'block';">Create</button></p><div id="kotlin-example" class="kotlin-code-2" style="display: none;"><pre><code class="hljs language-text">import cat.Cat
+
+fun main(args: Array&lt;String&gt;) {
+//sampleStart
+    val cat = Cat(&quot;Kitty&quot;)
+    println(cat.name)
+//sampleEnd
+}
+</code></pre><textarea class="hidden-dependency">
+    package cat
+    class Cat(val name: String) 
+  </textarea></div></body></html>

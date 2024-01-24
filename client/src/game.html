@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <!-- Top container with two side-by-side boxes -->
+    <div class="top-container">
+        <div class="left-box">
+            <h2>Code</h2>
+            <p>
+                    <textarea id="ship-code" onkeyup="run()"  style="height: 300px;width: 90%;">
+    // Left Button Control
+    function buttonClickLeft() {
+        //ship.x = ship.x - 1;
+    }
+
+    // Right Button Control
+    function buttonClickRight() {
+        //ship.x = ship.x + 1;
+    }
+
+</textarea></p><br>
+<p><h3>Instructions: You are the Chief Engineer on the spaceship USS Yorktown. Like it's namesake, your ship needs to depart before the ship is fully repaired. It is up to you to get the ship working. Above is the code for left and right navigation. Uncomment the relevant lines of code to fix the ship's navigation controls.</h3></p>
+        </div>
+        <div class="right-box" id ="game">
+            <h2>Game View</h2>
+            <canvas class="game-canvas" id="gameCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Bottom container -->
+    <div class="bottom-container">
+        <h2>Navigation Controls</h2>
+        <p>
+            <button id="leftNavButton" type="button" onclick="buttonClickLeft()" style="height: 50px;width: 100px;">LEFT</button>
+            <button id="rightNavButton" type="button" onclick="buttonClickRight()" style="height: 50px;width: 100px;">RIGHT</button>
+        </p>
+    </div>
+<script>
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+function run() {
+  "use strict";
+   let jsCode = document.getElementById("ship-code").value;
+   console.log(jsCode);
+   eval?.(jsCode);
+}
+
+// Game state
+let ship = {
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    angle: 0,
+    velocity: { x: 0, y: 0 },
+    thrust: false,
+    shield: false,
+    fire: false,
+    sensors: []
+};
+
+// Game loop
+function update() {
+    // Update ship position, handle controls, etc.
+    // ...
+
+        console.log("GAME LOOP ");
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw ship
+    drawShip();
+
+    // Request next frame
+    requestAnimationFrame(update);
+}
+
+function drawShip() {
+    ctx.save();
+    ctx.translate(ship.x, ship.y);
+    ctx.rotate(ship.angle);
+    ctx.beginPath();
+    ctx.moveTo(10, 0);
+    ctx.lineTo(-10, -7);
+    ctx.lineTo(-5, 0);
+    ctx.lineTo(-10, 7);
+    ctx.closePath();
+    if (ship.shield) {
+        ctx.strokeStyle = 'blue';
+    } else {
+        ctx.strokeStyle = 'white';
+    }
+    ctx.stroke();
+    ctx.restore();
+}
+
+// Start game loop
+update();
+
+
+</script>
+</body>
+</html>
+

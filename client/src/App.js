@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Navbar,
-  NavbarBrand,
-  UncontrolledTooltip
-} from 'reactstrap';
+import { Navbar, NavbarBrand, UncontrolledTooltip } from 'reactstrap';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { DefaultEditor } from 'react-simple-wysiwyg';
+// import { DefaultEditor } from 'react-simple-wysiwyg';
+import { Controlled as CodeMirror } from 'react-codemirror2';
+import Editor from './Editor';
 import Avatar from 'react-avatar';
+import Typography from '@mui/material/Typography';
+import 'codemirror/lib/codemirror.css';
 
 import './App.css';
 
@@ -31,14 +31,14 @@ function App() {
     share: true,
     filter: () => false,
     retryOnError: true,
-    shouldReconnect: () => true
+    shouldReconnect: () => true,
   });
 
   useEffect(() => {
-    if(username && readyState === ReadyState.OPEN) {
+    if (username && readyState === ReadyState.OPEN) {
       sendJsonMessage({
         username,
-        type: 'userevent'
+        type: 'userevent',
       });
     }
   }, [username, sendJsonMessage, readyState]);
@@ -49,8 +49,11 @@ function App() {
         <NavbarBrand href="/">Real-time document editor</NavbarBrand>
       </Navbar>
       <div className="container-fluid">
-        {username ? <EditorSection/>
-            : <LoginSection onLogin={setUsername}/> }
+        {username ? (
+          <EditorSection />
+        ) : (
+          <LoginSection onLogin={setUsername} />
+        )}
       </div>
     </>
   );
@@ -60,10 +63,10 @@ function LoginSection({ onLogin }) {
   const [username, setUsername] = useState('');
   useWebSocket(WS_URL, {
     share: true,
-    filter: () => false
+    filter: () => false,
   });
   function logInUser() {
-    if(!username.trim()) {
+    if (!username.trim()) {
       return;
     }
     onLogin && onLogin(username);
@@ -77,11 +80,18 @@ function LoginSection({ onLogin }) {
             <p className="account__name">Hello, user!</p>
             <p className="account__sub">Join to edit the document</p>
           </div>
-          <input name="username" onInput={(e) => setUsername(e.target.value)} className="form-control" />
+          <input
+            name="username"
+            onInput={(e) => setUsername(e.target.value)}
+            className="form-control"
+          />
           <button
             type="button"
             onClick={() => logInUser()}
-            className="btn btn-primary account__btn">Join</button>
+            className="btn btn-primary account__btn"
+          >
+            Join
+          </button>
         </div>
       </div>
     </div>
@@ -89,15 +99,16 @@ function LoginSection({ onLogin }) {
 }
 
 function History() {
-  console.log('history');
   const { lastJsonMessage } = useWebSocket(WS_URL, {
     share: true,
-    filter: isUserEvent
+    filter: isUserEvent,
   });
   const activities = lastJsonMessage?.data.userActivity || [];
   return (
     <ul>
-      {activities.map((activity, index) => <li key={`activity-${index}`}>{activity}</li>)}
+      {activities.map((activity, index) => (
+        <li key={`activity-${index}`}>{activity}</li>
+      ))}
     </ul>
   );
 }
@@ -105,13 +116,17 @@ function History() {
 function Users() {
   const { lastJsonMessage } = useWebSocket(WS_URL, {
     share: true,
-    filter: isUserEvent
+    filter: isUserEvent,
   });
   const users = Object.values(lastJsonMessage?.data.users || {});
-  return users.map(user => (
+  return users.map((user) => (
     <div key={user.username}>
-      <span id={user.username} className="userInfo" key={user.username}>
-        <Avatar name={user.username} size={40} round="20px"/>
+      <span
+        id={user.username}
+        className="userInfo"
+        key={user.username}
+      >
+        <Avatar name={user.username} size={40} round="20px" />
       </span>
       <UncontrolledTooltip placement="top" target={user.username}>
         {user.username}
@@ -125,12 +140,9 @@ function EditorSection() {
     <div className="main-content">
       <div className="document-holder">
         <div className="currentusers">
-          <Users/>
+          <Users />
         </div>
-        <Document/>
-      </div>
-      <div className="history-holder">
-        <History/>
+        <Document />
       </div>
     </div>
   );
@@ -139,20 +151,58 @@ function EditorSection() {
 function Document() {
   const { lastJsonMessage, sendJsonMessage } = useWebSocket(WS_URL, {
     share: true,
-    filter: isDocumentEvent
+    filter: isDocumentEvent,
   });
 
-  let html = lastJsonMessage?.data.editorContent || '';
+  let html = lastJsonMessage?.data.editorContent;
 
-  function handleHtmlChange(e) {
+  function handleHtmlChange(value) {
     sendJsonMessage({
       type: 'contentchange',
-      content: e.target.value
+      content: value,
     });
   }
 
   return (
-    <DefaultEditor value={html} onChange={handleHtmlChange} />
+    <>
+      {/* <DefaultEditor value={html} onChange={handleHtmlChange} />*/}
+      <div className="top-container">
+        <div className="left-box">
+          <h2>
+            <b>Code</b>
+          </h2>
+          <CodeMirror
+            value={html}
+            height="500px"
+            options={{
+              lineWrapping: true,
+              lint: true,
+              lineNumbers: true,
+              autoCloseTags: true,
+              autoCloseBrackets: true,
+            }}
+            onBeforeChange={(editor, data, value) => {
+              handleHtmlChange(value);
+            }}
+            style={{ border: 'solid black 3', lineHeight: '3' }}
+          />
+          <Typography component="p" variant="h5">
+            <b>Instructions:</b> You are the Chief Engineer on the
+            spaceship USS Yorktown. Like it's namesake, your ship
+            needs to depart before the ship is fully repaired. It is
+            up to you to get the ship working. Above is the code for
+            left and right navigation. Uncomment the relevant lines of
+            code to fix the ship's navigation controls.
+          </Typography>
+        </div>
+        <div className="right-box" id="game">
+          <Editor value={html} />
+        </div>
+        <div className="history-holder">
+          <History />
+        </div>
+      </div>
+    </>
   );
 }
 
